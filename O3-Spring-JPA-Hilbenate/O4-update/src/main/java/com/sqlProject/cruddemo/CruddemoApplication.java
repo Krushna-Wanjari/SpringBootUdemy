@@ -19,8 +19,19 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(daoImplementation student){
 		return runner -> {
-		  find(student);
+		  updateStudent(student);
 		};
+	}
+
+	private void updateStudent(daoImplementation student) {
+
+		Student st = student.find(1);
+		System.out.println("student id is " + st.getId());
+		st.setFirstName("Yami");
+
+        student.update(st);
+
+		System.out.println(st);
 	}
 
 	private void findall(daoImplementation student) {

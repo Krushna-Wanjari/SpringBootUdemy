@@ -14,32 +14,43 @@ public class daoImplementation implements StudentDao {
     private EntityManager em;
 
     @Autowired
-    public daoImplementation(EntityManager entityManager) {
-        this.em = entityManager;
+    public daoImplementation(EntityManager em) {
+        this.em = em;
     }
 
     @Override
     @Transactional
     public void save(Student student) {
-     em.persist(student);
+        em.persist(student);
     }
 
     @Override
-    public Student find(Integer id) {
-        return em.find(Student.class, id);
+    public Student search(Integer id) {
+        Student st = em.find(Student.class, id);
+        return st;
     }
 
     @Override
-    public List<Student> findAll(){
-        TypedQuery<Student> query = em.createQuery("FROM Student", Student.class);
+    public List<Student> searchAll() {
+        TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s ", Student.class);
         return query.getResultList();
     }
 
     @Override
     public List<Student> findByLastName(String lastName) {
-        TypedQuery<Student> query = em.createQuery("FROM Student WHERE lastName = :thedata", Student.class);
-        query.setParameter("thedata", lastName);
+        TypedQuery query =  em.createQuery("SELECT s FROM Student s WHERE s.lastName = :lastName", Student.class);
+        query.setParameter("lastName", lastName);
         return query.getResultList();
     }
 
+    @Override
+    @Transactional
+    public void update(Student student) {
+      em.merge(student);
+    }
+
+    @Override
+    public void delete(Integer id) {
+
+    }
 }

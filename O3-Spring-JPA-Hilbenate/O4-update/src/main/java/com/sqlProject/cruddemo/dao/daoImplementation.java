@@ -42,4 +42,10 @@ public class daoImplementation implements StudentDao {
         return query.getResultList();
     }
 
+    @Override
+    @Transactional
+    public void update(Student student){
+        em.merge(student);
+    }
+
 }
