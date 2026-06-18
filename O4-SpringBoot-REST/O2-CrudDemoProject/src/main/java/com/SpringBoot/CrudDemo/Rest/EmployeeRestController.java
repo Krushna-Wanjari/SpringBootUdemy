@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -38,6 +39,11 @@ public class EmployeeRestController {
     @DeleteMapping("/Employee/{id}")
     public void deleteEmployee(@PathVariable int id) {
         es.deleteById(id);
+
+    }
+
+    @PatchMapping("/Employee/{id}")
+    public Employee updateEmployee(@RequestBody Employee employee,@PathVariable int id) {
 
     }
 }
