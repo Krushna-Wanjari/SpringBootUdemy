@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `members`;
 -- Table structure for table `members`
 --
 
-CREATE TABLE `members` (
+CREATE TABLE `members` (git
   `user_id` varchar(50) NOT NULL,
   `pw` char(68) NOT NULL,
   `active` tinyint NOT NULL,
